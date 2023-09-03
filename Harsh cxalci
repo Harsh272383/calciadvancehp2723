@@ -1,0 +1,102 @@
+import fractions
+import sympy
+
+# Function to solve proportions
+def solve_proportion(a, b, c, x):
+    return (a * x) / b if c == "y" else (b * x) / a
+
+# Function to solve for x in equations
+def solve_equation(equation):
+    x = sympy.symbols('x')
+    solution = sympy.solve(equation, x)
+    return solution
+
+# Function to factor square roots
+def factor_square_root(number):
+    sqrt = sympy.sqrt(number)
+    return sqrt
+
+# Function to convert decimals to fractions
+def decimal_to_fraction(decimal):
+    fraction = fractions.Fraction(decimal).limit_denominator()
+    return fraction
+
+# Function to convert decimals to percents
+def decimal_to_percent(decimal):
+    percent = decimal * 100
+    return percent
+
+# Function to convert fractions to decimals
+def fraction_to_decimal(numerator, denominator):
+    decimal = float(numerator) / denominator
+    return decimal
+
+# Function to convert fractions to percents
+def fraction_to_percent(numerator, denominator):
+    decimal = fraction_to_decimal(numerator, denominator)
+    percent = decimal_to_percent(decimal)
+    return percent
+
+# Function to convert percents to decimals
+def percent_to_decimal(percent):
+    decimal = percent / 100
+    return decimal
+
+# Function to convert percents to fractions
+def percent_to_fraction(percent):
+    decimal = percent_to_decimal(percent)
+    fraction = decimal_to_fraction(decimal)
+    return fraction
+
+# Main calculator loop
+while True:
+    print("Options:")
+    print("1. Solve Proportions")
+    print("2. Solve for x in Equations")
+    print("3. Factor Square Roots")
+    print("4. Convert Decimals")
+    print("5. Convert Fractions")
+    print("6. Convert Percents")
+    print("7. Quit")
+    
+    user_input = input("Enter your choice (1/2/3/4/5/6/7): ")
+    
+    if user_input == "7":
+        break
+    elif user_input == "1":
+        a = float(input("Enter the first ratio (a): "))
+        b = float(input("Enter the second ratio (b): "))
+        c = input("Solve for (x or y): ")
+        x = float(input(f"Enter the value of {c}: "))
+        result = solve_proportion(a, b, c, x)
+        print(f"{c} = {result}")
+    elif user_input == "2":
+        equation_str = input("Enter the equation (e.g., '2*x = 10'): ")
+        equation = sympy.Eq(sympy.sympify(equation_str))
+        solutions = solve_equation(equation)
+        print("Solutions for x:", solutions)
+    elif user_input == "3":
+        number = float(input("Enter the number to factor the square root of: "))
+        result = factor_square_root(number)
+        print(f"Sqrt({number}) =", result)
+    elif user_input == "4":
+        decimal = float(input("Enter a decimal number: "))
+        fraction = decimal_to_fraction(decimal)
+        percent = decimal_to_percent(decimal)
+        print(f"Decimal to Fraction: {fraction}")
+        print(f"Decimal to Percent: {percent}%")
+    elif user_input == "5":
+        numerator = int(input("Enter the numerator of the fraction: "))
+        denominator = int(input("Enter the denominator of the fraction: "))
+        decimal = fraction_to_decimal(numerator, denominator)
+        percent = fraction_to_percent(numerator, denominator)
+        print(f"Fraction to Decimal: {decimal}")
+        print(f"Fraction to Percent: {percent}%")
+    elif user_input == "6":
+        percent = float(input("Enter a percent: "))
+        decimal = percent_to_decimal(percent)
+        fraction = percent_to_fraction(percent)
+        print(f"Percent to Decimal: {decimal}")
+        print(f"Percent to Fraction: {fraction}")
+    else:
+        print("Invalid input")
